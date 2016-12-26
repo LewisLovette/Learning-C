@@ -1,7 +1,12 @@
 #include <stdio.h>
 
 void XD() {
-	printf("Change");
+	bool x = true;
+	if (x) {
+		printf("x is true");
+	} else {
+		printf("x is false");
+	}
 }
 
 int main() {
