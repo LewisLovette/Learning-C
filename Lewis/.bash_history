@@ -1,122 +1,3 @@
-ls
-cd home
-cd ..
-ls
-./Sublime\ Text\ 3.lnk 
-cd Sublime\ Text\ 3.lnk 
-cygstart[option]
-cygstart
-ls
-start Sublime\ Text\ 3.lnk 
-cygstart Sublime\ Text\ 3.lnk 
-cygstart cProgramsNetbeans.lnk 
-ls
-ls
-cd array/
-ls
-./arraysT
-./arraysT3
-ls
-cd ..
-ls
-ls
-cd array/
-;s
-ls
-./arraysT3
-l
-ls
-cd ..
-ls
-cd array/
-ls
-> arraysT4.c
-ls
-ls
-gcc arraysT4 -o arraysT4
-gcc arraysT4 -o arraysT4.exe
-ls
-gcc arraysT4.c -o arraysT4
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-ls
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-gcc arraysT4.c -o arraysT4
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-gcc arraysT4.c -o arraysT4
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-gcc arraysT4.c -o arraysT4
-./arraysT4.exe 
-ls
-cd ..
-ls
-cygstart Sublime\ Text\ 3.lnk 
-ls
-cd array/
-cd ..
-ls
-cygstart Sublime\ Text\ 3.lnk 
-cd array/
-ls
-./arraysT4
-cygstart Sublime\ Text\ 3.lnk 
-ls
-cd ..
-cygstart Sublime\ Text\ 3.lnk 
-ls
-cd array/
-ls
-cd ..
-ls
-cd ..
-ls
-cd array/
-ls
-ls
-> arraysT5.c
-ls
-ls
-gcc arraysT5.c -o arraysT5
-ls
-gcc arraysT5.c -o arraysT5
 gcc arraysT5.c -o arraysT5
 ./arraysT5
 gcc arraysT5.c -o arraysT5
@@ -437,3 +318,183 @@ ls
 cd home
 ls
 close
+cd ..
+ls
+cygstart Sublime\ Text\ 3.lnk 
+ls
+cd array/
+> arraysT15.c
+gcc arraysT15.c -o arraysT15
+gcc arraysT15.c -o arraysT15
+gcc arraysT15.c -o arraysT15
+./arraysT15.exe 
+gcc arraysT15.c -o arraysT15
+./arraysT15.exe 
+gcc arraysT15.c -o arraysT15
+./arraysT15.exe 
+gcc arraysT15.c -o arraysT15
+./arraysT15.exe 
+./arraysT15.exe 
+./arraysT15.exe 
+gcc arraysT15.c -o arraysT15
+./arraysT15.exe 
+gcc arraysT15.c -o arraysT15
+./arraysT15.exe 
+gcc arraysT15.c -o arraysT15
+./arraysT15.exe 
+gcc arraysT15.c -o arraysT15
+./arraysT15.exe 
+gcc arraysT15.c -o arraysT15
+./arraysT15.exe 
+cd ..
+ls
+cd projectEuler/
+ls
+> problem9.c
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+./problem9.exe 
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+gcc problem9.c -o problem9
+./problem9.exe 
+cd ..
+cd array/
+cd ..
+ls -al
+cd Atul/
+gcc MatrixEquality.c -o MatrixEquality
+./MatrixEquality.
+./MatrixEquality
+./MatrixEquality
+gcc Boolean.c -o Boolean
+./Boolean
+gcc Boolean.c -o Boolean
+./Boolean
+gcc Boolean.c -o Boolean
+./Boolean
+gcc MatrixEquality.c -o MatrixEquality
+./MatrixEquality
+./MatrixEquality
+gcc MatrixEquality.c -o MatrixEquality
+./MatrixEquality
+ls
+cd ..
+ls
+cygstart Sublime\ Text\ 3.lnk 
+ls -al
+ls -al
+git --v
+git -v
+git --help
+ls -al
+git init
+git add .
+git commit -m "Initial commit"
+git config --global user.email "lewislovette3@hotmail.co.uk"
+git config --global user.name "Lewis Lovette"
+git commit -m "Initial commit"
+git remote add origin https://github.com/LewisLovette/Learning-C.git
+git push origin master
+git push -u origin master
+git remote add origin http://github.com/LewisLovette/Learning-C.git
+git push origin master
+git remote add origin https://github.com/LewisLovette/Learning-C.git
+rm -rf .git/
+ls -al
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/LewisLovette/Learning-C.git
+git push -u origin master
+git push -u origin master
+git add .
+git commit -m "Created example program"
+you d/c'd xDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+DDDd
+
+DDUDMDMDDDDD
+let's skype nigga
