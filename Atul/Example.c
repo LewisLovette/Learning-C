@@ -8,7 +8,7 @@ void XD() {
 		printf("x is false");
 	}
 }
-//XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+//Lewis did this.
 int main() {
 
 	XD();
