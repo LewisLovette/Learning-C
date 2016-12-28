@@ -3,7 +3,7 @@
 int unsorted[20] = {22, 54, 32, 75, 34, 84, 17, 43, 14, 32, 32, 44, 62, 12, 26, 25, 74, 35, 64, 34};
 
 void sort(){
-	int x = 0;									//integer that if it is equal to 0 means that the array is sorted correctly so don't need to loop again.
+	int x = 0;									//integer that if it is equal to 0 means that the array is sorted correctly so doesn't need to loop again.
 	for(int i = 0; i <= 19; i++){
 		if(unsorted[i] > unsorted[i + 1]){
 			int hold = unsorted[i];				//this holds the array position 'i'.
