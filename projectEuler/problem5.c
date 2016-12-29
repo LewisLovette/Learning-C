@@ -14,9 +14,9 @@ void divide(long num){
 		if(check != 20){				//if 'check' is not equal to 20 thn it means that 'num' % all the numbers from 1-20 dont equal 0  
 			check = 0;					//so we reset 'check' to 0 so it can count up to 20 again
 			num++;						//and add 1 to 'num' until the correct number is found.
-		} else{																								//else num is equal to 20, it means that 'num' % all numbers from 1-20 equal 0
-			printf("%ld is the smallest number evenly divisible by all numbers from 1-20. \n", num);		//and that means that it will print this number
-			break;																							//and then it breaks so that it doesn't loop again and therefore program ends.
+		} else{																				//else num is equal to 20, it means that 'num' % all numbers from 1-20 equal 0
+			printf("%ld is the smallest number evenly divisible by all numbers from 1-20. \n", num);	//and that means that it will print this number
+			break;																			//and then it breaks so that it doesn't loop again and therefore program ends.
 		}
 	}
 }
