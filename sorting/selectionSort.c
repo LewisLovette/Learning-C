@@ -21,7 +21,8 @@ void selectionSort(){
         printf("\n");
         //this section is used to swap the current position with the lowest number in the unsorted part of the array.
         int hold = unsorted[a];
-        unsorted[a] = unsorted[min];
+        unsorted[a] = unsorted[minls
+        	];
         unsorted[min] = hold;
         //1 is then added to 'a' as this part of the array is not sorted so it moves to clean the next place in the array.
         a++;
