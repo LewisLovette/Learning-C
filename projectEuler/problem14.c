@@ -9,7 +9,7 @@ void longestChain(){
 			xCopy = x;
 			chain++;
 			if(chain > chainHold){	//This sections checks if the Collats Problem chain is larger than the previous largest - only the largest chain under
-				chainHold = chain;													//a million will keep this place as no other chain will be longer than it.
+				chainHold = chain;														//a million will keep this place as no other chain will be longer than it.
 				xSave = xCopy - 1;			//+1 is added as excess, so needs to be taken away when the number is displayed.
 				printf("%ld - Chain: %d\n", xCopy - 1, chain); //prints the most recent number with the largest chain.
 			}
