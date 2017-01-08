@@ -1,7 +1,7 @@
 //SRPN - Revers Polish Notation with all arithmetic saturated
 #include <stdio.h>
 #include <ctype.h> //to see if a character is a number or not.
-#include <string.h> //to see how many characters were entered in the charArray.
+//#include <string.h> //to see how many characters were entered in the charArray.
 //create a stack type array that you can input the numbers into, if it's char then it goes into a char array instead.
 //and then I will make it place numArray[1] then charArray[1] then numArray[2] then charArray[2] and so on.
 //using a stack system will mean that it won't pass the number in the array past how many numbers the user has entered.
@@ -12,6 +12,7 @@
 
 int numSP;//--As in 'number Stack Pointer'-- For 'numArray'.
 char charSP;//--As in 'character Stack Pointer'-- For 'charArray'.
+char operatorSP;
 int numArray[1000];	//setting these two arrays to 1,000 means that they won't saturate the full arrays.
 char charArray[1000];
 
@@ -25,23 +26,34 @@ void calculate(){
 //into the array until it hits an operand at which point it will move everthing back and start with the next number entered until all numbers are in numArray and
 //																																	   all operands are in charArray.
 void input(){//#struggling with input zz
+	int countInput;
 	scanf("%c", &charArray);	//so it puts all the characters in - we'll need to count how many go in so we can move the stack point though.
-	//charSP = strlen(charArray);
+	//Counting the number of characters inputted.
+	//why doesn't it work :(
+	while(charArray[countInput] != '\0'){
+		countInput++;
+		printf("%d\n", countInput);
+	}
 	if(charArray[charSP] == '='){
 		//Test.
 		printf("Total = ??");
 		//send to calculate function.
-	} else if(isdigit(charArray[0])){
+	} else if(isdigit(charArray[charSP])){
 		//placing each digit into the position on numArray[numSP] such that if we enter 132 it will place that into the stack pointer position for 'numArray'
-		for(int x = 0; x <= charSP; x++){
-			numArray[numSP] += charArray[x] - '0';
+		for(int x = operatorSP; x <= countInput; x++){
+			numArray[numSP] += charArray[x + 1] - '0';
 			numArray[numSP] *= 10;
 		}
 		numArray[numSP] /= 10;
 		printf("Number: %d\n", numArray[numSP]);
 		numSP++;
+		charSP = 0;
+	} else if(charArray[operatorSP] >= 'a' && charArray[operatorSP] <= 'z'){
+		//test
+		printf("Invalid Operand.\n");
 	} else{
 		printf("%c\n", charArray[charSP]);
+		operatorSP++;
 		charSP++;
 	}
 }
