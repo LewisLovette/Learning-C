@@ -1,6 +1,7 @@
 //SRPN - Revers Polish Notation with all arithmetic saturated
 #include <stdio.h>
 #include <ctype.h> //to see if a character is a number or not.
+#include <string.h> //to see how many characters were entered in the charArray.
 //create a stack type array that you can input the numbers into, if it's char then it goes into a char array instead.
 //and then I will make it place numArray[1] then charArray[1] then numArray[2] then charArray[2] and so on.
 //using a stack system will mean that it won't pass the number in the array past how many numbers the user has entered.
@@ -23,14 +24,20 @@ void calculate(){
 //I can try to make it place the characters inputted and place that into array then go 1 by 1 and see if it is a number, if it is then it places that num
 //into the array until it hits an operand at which point it will move everthing back and start with the next number entered until all numbers are in numArray and
 //																																	   all operands are in charArray.
-void input(){
-	scanf("%c", &charArray[charSP]);
+void input(){//#struggling with input zz
+	scanf("%c", &charArray);	//so it puts all the characters in - we'll need to count how many go in so we can move the stack point though.
+	//charSP = strlen(charArray);
 	if(charArray[charSP] == '='){
 		//Test.
 		printf("Total = ??");
 		//send to calculate function.
-	} else if(isdigit(charArray[charSP])){
-		numArray[numSP] = charArray[charSP] - '0';
+	} else if(isdigit(charArray[0])){
+		//placing each digit into the position on numArray[numSP] such that if we enter 132 it will place that into the stack pointer position for 'numArray'
+		for(int x = 0; x <= charSP; x++){
+			numArray[numSP] += charArray[x] - '0';
+			numArray[numSP] *= 10;
+		}
+		numArray[numSP] /= 10;
 		printf("Number: %d\n", numArray[numSP]);
 		numSP++;
 	} else{
@@ -40,7 +47,7 @@ void input(){
 }
 
 int main(){
-	//test
+	printf("Reverse Polish Notation/Postfix Notation.\n");
 	input();
 
 	return 0;
