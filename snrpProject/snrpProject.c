@@ -11,10 +11,10 @@ char operatorArray[1000];
 
 //RPN goes:  Operand -> Operator -> Operand -> Operator and so on. -Picture this with stacks.
 void calculate(){
-	if(operatorSP != numSP - 1){
-		printf("Stack Underflow.\n");
+	if(operatorSP == numSP){
+		printf("Stack underflow.\n");
 		userInput();
-	}else{
+	} else{
 		while(operatorSP > 0){
 			if(operatorArray[operatorSP - 1] == '*'){
 				numArray[numSP - 2] *= numArray[numSP - 1];
@@ -37,16 +37,20 @@ void calculate(){
 }
 
 void userInput(){
+	//stage 2: make it so a line can create an output. Such as, Input: 2 5 + d/=   to get the output.
+	//This means that spaces need to be able to seperate operands from eachother and other operators.
 	char inputA[100];
 	int inputSP = 0;
 	scanf("%s", &inputA);
 	//Moving stack pointer to the position of the last character entered into 'inputA[]' + 1.
+	//We could make the while loop incapsulate the whole algorithm, so that it check between spaces, places a number/operator then 
+	//																												moves eveything back and checks the string again.
 	while(inputA[inputSP] != '\0'){
 		inputSP++;
 	}
 	//test
 	//printf("%d\n", inputSP);
-	if(inputA[0] == '='){
+	if(inputA[0] == '=' || inputA[0] == 'd'){
 		//printf("Test for '='\n");
 		calculate();
 	} else if(isdigit(inputA[0])){
@@ -69,10 +73,7 @@ void userInput(){
 		//	printf("operatorSP %d = %c\n", j, operatorArray[j]);
 		//}
 		userInput();
-	} else{
-		userInput();
 	}
-
 }
 
 int main(){
