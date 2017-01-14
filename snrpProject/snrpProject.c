@@ -1,29 +1,41 @@
 //SRPN - Revers Polish Notation with all arithmetic saturated
 #include <stdio.h>
-#include <ctype.h> //to see if a character is a number or not.
-#include <limits.h> //so that we are able to detect int overflow. with 'INT_MAX' and 'INT_MIN'.
-
+#include <stdbool.h> //create the functions instead of using ecternal libraries.
+//Issues:
+// entering '-' at any point where user input is all on the same line, it makes it think that the number before or after is a negative, test more.
 void userInput();
 
 int numSP;//--As in 'number Stack Pointer'-- For 'numArray'.
 char operatorSP;//--As in 'operator Stack Pointer'-- For 'operatorArray'.
 long numArray[1000];	//setting these two arrays to 1,000 means that they won't saturate the full arrays.
 char operatorArray[1000];
+char inputA[100];
 
-//each '###Overflow' follows the same structure as 'additionOverflow' does with a few operand changes to fit the intended operand function.
+bool digitCheck(){
+	if(inputA[0] >= 48 && inputA[0] <= 57){
+		return true;
+	} else if(inputA[0] == 45 && inputA[1] >= 48 && inputA[1] <= 57){
+		return true;
+	} else {
+		return false;
+	}
+}
+
 int overflowCheck(long x, long y, char operatorPass){ //as the array is 'long', we pass the number as a 'long' this means that if it is larger than an int, we will be
-//				  able to store it, set it as int if we type cast it, though this isn't needed, it makes the code more readble as the original SRPN works to INT_MAX.
+//				  able to store it, set it as int if we type cast it, though this isn't needed, it makes the code more readble as the original SRPN works to (-)2147483647.
 	long sum;
-	if(operatorPass == '+' || operatorPass == '*' || operatorPass == '/'){
+	if(operatorPass == '+' || operatorPass == '*' || operatorPass == '/' || operatorPass == '%'){
 		if(operatorPass == '+')
 			sum = x + y;
 		else if(operatorPass == '*')
 			sum = x * y;
 		else if(operatorPass == '/')
 			sum = x / y;
-	
-		if(x > 0 && sum > INT_MAX){//need to check in 'x' is negative or positive as that will change weather we output the maximum positive or negative integer.
-			sum = INT_MAX;
+		else if(operatorPass == '%')
+			sum = x % y;
+
+		if(x > 0 && sum > 2147483647){//need to check in 'x' is negative or positive as that will change weather we output the maximum positive or negative integer.
+			sum = 2147483647;
 			//printf("Overflow: %ld\n", sum);
 			return (int)sum;
 		} else if(x < 0 && sum < -2147483647){ //for some reason putting 'INT_MIN' means that it doesn't check if the sum is below it so passes it to else..
@@ -37,8 +49,8 @@ int overflowCheck(long x, long y, char operatorPass){ //as the array is 'long', 
 	} else{
 		sum = x - y;
 		//same as above except x > 0 and x < 0 are flipped for each 'if' so that it does as the operator intends.
-		if(x < 0 && sum > INT_MAX){
-			sum = INT_MAX;
+		if(x < 0 && sum > 2147483647){
+			sum = 2147483647;
 			return (int)sum;
 		} else if(x > 0 && sum < -2147483647){
 			sum = -2147483647;
@@ -52,7 +64,7 @@ int overflowCheck(long x, long y, char operatorPass){ //as the array is 'long', 
 
 //RPN goes:  Operand -> Operator -> Operand -> Operator and so on. -Picture this with stacks.
 void calculate(){
-	if(operatorSP == numSP){
+	if(operatorSP >= numSP){
 		printf("Stack underflow.\n");
 		userInput();
 	} else{
@@ -70,14 +82,11 @@ void calculate(){
 }
 
 void userInput(){
-	//stage 3: make it so a line can create an output. Such as, Input: 2 5 + d/=   to get the output.
-	//This means that spaces need to be able to seperate operands from eachother and other operators.
-	char inputA[100];
+	//If I need data from this stack pointer, I could make it a global variable(so it can be accessed outside of this scope) and then just make it reset inside of userInput.
 	int inputSP = 0;
 	scanf("%s", &inputA);
+
 	//Moving stack pointer to the position of the last character entered into 'inputA[]' + 1.
-	//We could make the while loop incapsulate the whole algorithm, so that it check between spaces, places a number/operator then 
-	//																												moves eveything back and checks the string again.
 	while(inputA[inputSP] != '\0'){
 		inputSP++;
 	}
@@ -86,7 +95,8 @@ void userInput(){
 	if(inputA[0] == '=' || inputA[0] == 'd'){
 		//printf("Test for '='\n");
 		calculate();
-	} else if(isdigit(inputA[0]) || inputA[0] == '-' && isdigit(inputA[1])){
+	} else if(digitCheck()){ //This will check to see if inputA[0] is a digit, OR 'inputA[0] == '-' AND inputA[1]' is a digit. For positive and negative numbers.
+	//If there is a '-' then it means the number is a negative so this sections converts the string into an int and then into a negative number.
 		if(inputA[0] == '-'){
 			for(int i = 1; i < inputSP; i++){
 			numArray[numSP] += inputA[i] - '0';
@@ -94,7 +104,7 @@ void userInput(){
 			}
 			numArray[numSP] /= 10;
 			numArray[numSP] = numArray[numSP] - (numArray[numSP] * 2);
-		} else {
+		} else { //else it will just convert the string into a number.
 			for(int i = 0; i < inputSP; i++){
 				numArray[numSP] += inputA[i] - '0';
 				numArray[numSP] *= 10;
@@ -103,15 +113,15 @@ void userInput(){
 		}
 		numSP++;
 		userInput();
-	} else if(inputA[0] == '*' || inputA[0] == '/' || inputA[0] == '+' || inputA[0] == '-'){
+	} else if(inputA[0] == '*' || inputA[0] == '/' || inputA[0] == '+' || inputA[0] == '-' || inputA[0] == '%'){
 		operatorArray[operatorSP] = inputA[inputSP - 1];
 		operatorSP++;
-		//test
-		//for(int j = 0; j < operatorSP; j++){
-		//	printf("operatorSP %d = %c\n", j, operatorArray[j]);
-		//}
+
 		userInput();
 	}
+	//Test:
+	//printf("Fail.\n");
+	userInput();
 }
 
 int main(){
