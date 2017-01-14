@@ -1,8 +1,13 @@
 //SRPN - Revers Polish Notation with all arithmetic saturated
 #include <stdio.h>
-#include <stdbool.h> //create the functions instead of using ecternal libraries.
+#include <stdbool.h> //create the functions instead of using external libraries.
+
 //Issues:
-// entering '-' at any point where user input is all on the same line, it makes it think that the number before or after is a negative, test more.
+//	entering numbers without spaces such as: '11+1+1=' makes the program stop.
+//	after finding the answer, trying to use that answer to then do anything except addition will give an incorrect answer.
+//	'r' feature hasn't been implemented though it is using 'rand' with the seed of 0 --> http://stackoverflow.com/questions/8049556/what-s-the-difference-between-srand1-and-srand0
+//			note that 'r' shouldn't delete any of the 'r's eg: putting r r r r r d should print 5, then typing r r r d should print 8 as it adds the recent ones to the overall.
+//			so the 'randomSP' shouldn't delete anything from itself but instead keep adding and printing that many times.
 void userInput();
 
 int numSP;//--As in 'number Stack Pointer'-- For 'numArray'.
@@ -10,11 +15,16 @@ char operatorSP;//--As in 'operator Stack Pointer'-- For 'operatorArray'.
 long numArray[1000];	//setting these two arrays to 1,000 means that they won't saturate the full arrays.
 char operatorArray[1000];
 char inputA[100];
+//As in the original, 'r' only prints up to 23 times, we shall take those numbers and store them in an array.
+int randomSP;
+int randA[23] = {1804289383, 846930886, 1681692777, 1714636915, 1957747793, 424238335, 719885386, 1649760492, 596516649, 1189641421, 1025202362,
+ 1350490027, 783368690, 1102520059, 2044897763, 1967513926, 1365180540, 1540383426, 304089172, 1303455736, 35005211, 1303455736, 35005211};
+
 
 bool digitCheck(){
-	if(inputA[0] >= 48 && inputA[0] <= 57){
+	if(inputA[0] >= 48 && inputA[0] <= 57){	//checking that it is equal to it's ASCII value to see if the first digit is between 0-9.
 		return true;
-	} else if(inputA[0] == 45 && inputA[1] >= 48 && inputA[1] <= 57){
+	} else if(inputA[0] == 45 && inputA[1] >= 48 && inputA[1] <= 57){	//this also checks the ASCII value of '-' to see if the number is a negative.
 		return true;
 	} else {
 		return false;
@@ -79,6 +89,12 @@ void calculate(){
 		printf("%d\n", numArray[numSP - 1]);
 		userInput();
 	}
+
+	if(randomSP > 0){
+		for(int x = 0; x < randomSP; x++){
+		printf("%d\n", randA[x]);
+		}
+	} 
 }
 
 void userInput(){
@@ -90,14 +106,19 @@ void userInput(){
 	while(inputA[inputSP] != '\0'){
 		inputSP++;
 	}
-	//test
-	//printf("%d\n", inputSP);
+
+	if(inputA[0] == 'r' && randomSP < 23){ //Enter the ghetto 'r' that though it copies SRPN, it is not my desired way by using srand() and rand().
+		while(inputA[randomSP] == 'r'){
+			randomSP++;
+		}
+		userInput();
+	}
+
 	if(inputA[0] == '=' || inputA[0] == 'd'){
 		//printf("Test for '='\n");
 		calculate();
 	} else if(digitCheck()){ //This will check to see if inputA[0] is a digit, OR 'inputA[0] == '-' AND inputA[1]' is a digit. For positive and negative numbers.
-	//If there is a '-' then it means the number is a negative so this sections converts the string into an int and then into a negative number.
-		if(inputA[0] == '-'){
+		if(inputA[0] == '-'){	//If there is a '-' then it means the number is a negative so this sections converts the string into an int and then into a negative number.
 			for(int i = 1; i < inputSP; i++){
 			numArray[numSP] += inputA[i] - '0';
 			numArray[numSP] *= 10;
@@ -119,8 +140,7 @@ void userInput(){
 
 		userInput();
 	}
-	//Test:
-	//printf("Fail.\n");
+
 	userInput();
 }
 
