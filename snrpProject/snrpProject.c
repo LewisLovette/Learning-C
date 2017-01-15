@@ -1,25 +1,25 @@
 //SRPN - Revers Polish Notation with all arithmetic saturated
 #include <stdio.h>
 #include <stdbool.h> //create the functions instead of using external libraries.
-
+#include <stdlib.h> //to use the 'srand()' and 'rand()' function  --> http://stackoverflow.com/questions/8049556/what-s-the-difference-between-srand1-and-srand0
 //Issues:
 //	entering numbers without spaces such as: '11+1+1=' makes the program stop.
 //	after finding the answer, trying to use that answer to then do anything except addition will give an incorrect answer.
-//	'r' feature hasn't been implemented though it is using 'rand' with the seed of 0 --> http://stackoverflow.com/questions/8049556/what-s-the-difference-between-srand1-and-srand0
-//			note that 'r' shouldn't delete any of the 'r's eg: putting r r r r r d should print 5, then typing r r r d should print 8 as it adds the recent ones to the overall.
-//			so the 'randomSP' shouldn't delete anything from itself but instead keep adding and printing that many times.
+
 void userInput();
 
 int numSP;//--As in 'number Stack Pointer'-- For 'numArray'.
-char operatorSP;//--As in 'operator Stack Pointer'-- For 'operatorArray'.
+int numCheck; //so it doesn't print the answer after printing 'r' then doing an addition.
 long numArray[1000];	//setting these two arrays to 1,000 means that they won't saturate the full arrays.
-char operatorArray[1000];
-char inputA[100];
-//As in the original, 'r' only prints up to 23 times, we shall take those numbers and store them in an array.
-int randomSP;
-int randA[23] = {1804289383, 846930886, 1681692777, 1714636915, 1957747793, 424238335, 719885386, 1649760492, 596516649, 1189641421, 1025202362,
- 1350490027, 783368690, 1102520059, 2044897763, 1967513926, 1365180540, 1540383426, 304089172, 1303455736, 35005211, 1303455736, 35005211};
 
+char operatorSP;//--As in 'operator Stack Pointer'-- For 'operatorArray'.
+char operatorArray[1000];
+
+char inputA[100];
+
+int randomSP = 1;
+int randCheck;
+//	'r' feature has been implemented though it doesn't show the same numbers as original (which I believe to be the difference between Java and C's 'rand()' function).
 
 bool digitCheck(){
 	if(inputA[0] >= 48 && inputA[0] <= 57){	//checking that it is equal to it's ASCII value to see if the first digit is between 0-9.
@@ -74,10 +74,19 @@ int overflowCheck(long x, long y, char operatorPass){ //as the array is 'long', 
 
 //RPN goes:  Operand -> Operator -> Operand -> Operator and so on. -Picture this with stacks.
 void calculate(){
+	if(randomSP >= 1 && randomSP >= randCheck){
+		for(int x = 1; x < randomSP; x++){
+			srand(x);
+			printf("%d\n", rand());
+		}
+		randCheck = randomSP + 1;
+	}
+
 	if(operatorSP >= numSP){
-		printf("Stack underflow.\n");
-		userInput();
-	} else{
+		if(numSP != 0 || operatorSP != 0){
+			printf("Stack underflow.\n");
+		}
+	} else if(numSP >= numCheck){ //set it to 2 so that i means 'numSP' has a number in it that hasn't been manipulated.
 		while(operatorSP > 0){
 			numArray[numSP - 2] = overflowCheck(numArray[numSP - 2], numArray[numSP - 1], operatorArray[operatorSP - 1]);
 			//We do the sum and then move the stack back 1 so it interacts with the number before it.
@@ -86,15 +95,12 @@ void calculate(){
 			//test
 			//printf("In Calculate = %d\n", numArray[numSP - 1]);
 		}
+		numCheck = numSP + 1;
 		printf("%d\n", numArray[numSP - 1]);
 		userInput();
 	}
 
-	if(randomSP > 0){
-		for(int x = 0; x < randomSP; x++){
-		printf("%d\n", randA[x]);
-		}
-	} 
+	userInput();
 }
 
 void userInput(){
@@ -104,15 +110,13 @@ void userInput(){
 
 	//Moving stack pointer to the position of the last character entered into 'inputA[]' + 1.
 	while(inputA[inputSP] != '\0'){
+		if(inputA[inputSP] == 'r'){ //Enter the ghetto 'r' that though it copies SRPN, it is not my desired way by using srand() and rand().
+			randomSP++;
+		}
 		inputSP++;
 	}
 
-	if(inputA[0] == 'r' && randomSP < 23){ //Enter the ghetto 'r' that though it copies SRPN, it is not my desired way by using srand() and rand().
-		while(inputA[randomSP] == 'r'){
-			randomSP++;
-		}
-		userInput();
-	}
+	
 
 	if(inputA[0] == '=' || inputA[0] == 'd'){
 		//printf("Test for '='\n");
