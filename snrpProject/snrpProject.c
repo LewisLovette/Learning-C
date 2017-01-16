@@ -4,7 +4,6 @@
 #include <stdlib.h> //to use the 'srand()' and 'rand()' function  --> http://stackoverflow.com/questions/8049556/what-s-the-difference-between-srand1-and-srand0
 //Issues:
 //	entering numbers without spaces such as: '11+1+1=' makes the program stop.
-//	after finding the answer, trying to use that answer to then do anything except addition will give an incorrect answer.
 
 void userInput();
 
@@ -46,14 +45,11 @@ int overflowCheck(long x, long y, char operatorPass){ //as the array is 'long', 
 
 		if(x > 0 && sum > 2147483647){//need to check in 'x' is negative or positive as that will change weather we output the maximum positive or negative integer.
 			sum = 2147483647;
-			//printf("Overflow: %ld\n", sum);
 			return (int)sum;
 		} else if(x < 0 && sum < -2147483647){ //for some reason putting 'INT_MIN' means that it doesn't check if the sum is below it so passes it to else..
 			sum = -2147483647;
-			//printf("Underflow: %ld\n", sum);
 			return (int)sum;
 		} else{
-			//printf("Nope %ld\n", sum);
 			return (int)sum;
 		}
 	} else{
@@ -92,11 +88,13 @@ void calculate(){
 			//We do the sum and then move the stack back 1 so it interacts with the number before it.
 			operatorSP--;
 			numSP--;
-			//test
-			//printf("In Calculate = %d\n", numArray[numSP - 1]);
+			numArray[numSP] = 0; //this is done so that if we then want to place a new number into this position, it wont add the new number to itself as that is what will happen if 
+			//we don't set this position equal to 0 each time.
 		}
 		numCheck = numSP + 1;
 		printf("%d\n", numArray[numSP - 1]);
+		//Test to see why it was unable to correctly work after finding the answer to the first inputs.
+		//printf("numSP = %d\n", numArray[numSP]);
 		userInput();
 	}
 
@@ -115,8 +113,6 @@ void userInput(){
 		}
 		inputSP++;
 	}
-
-	
 
 	if(inputA[0] == '=' || inputA[0] == 'd'){
 		//printf("Test for '='\n");
