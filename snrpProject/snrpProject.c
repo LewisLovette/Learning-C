@@ -4,6 +4,11 @@
 #include <stdlib.h> //to use the 'srand()' and 'rand()' function  --> http://stackoverflow.com/questions/8049556/what-s-the-difference-between-srand1-and-srand0
 //Issues:
 //	entering numbers without spaces such as: '11+1+1=' makes the program stop.
+//		note: This could also been seen as an improvement as doing this would mean that negative numbers wouldn't exist when using the program without spaces.
+//		Though it is specified that it MUST be able to do this.
+//	doing 100000 - 0 d * =  prints out: answer, 'stack underflow'. In the original it goes: answer, 'stack underflow', answer.
+//		note: this doesn't need to be improved as it COULT be seen as an 'improvement' though it means functionality could differ between this and the original.
+//		To implement this: make a function that reads through each character and places the number into the array once it gets to the operator and places that into it's own array.
 
 void userInput();
 
@@ -104,6 +109,7 @@ void calculate(){
 void userInput(){
 	//If I need data from this stack pointer, I could make it a global variable(so it can be accessed outside of this scope) and then just make it reset inside of userInput.
 	int inputSP = 0;
+	int inputCopy = 0; //so that we are able to count to the value of 'inputSP' without manipulating the value of 'inpurSP'.
 	scanf("%s", &inputA);
 
 	//Moving stack pointer to the position of the last character entered into 'inputA[]' + 1.
@@ -112,6 +118,17 @@ void userInput(){
 			randomSP++;
 		}
 		inputSP++;
+	}
+	//test for use without spaces.
+	while(inputCopy < inputSP){
+		if(inputA[inputCopy] == '*' || inputA[inputCopy] == '/' || inputA[inputCopy] == '+' || inputA[inputCopy] == '-' || inputA[inputCopy] == '%' ){
+			operatorArray[operatorSP] = inputA[inputCopy];
+			inputA[inputCopy] == ' ';
+		}
+		if(inputA[inputCopy] == '=' || inputA[inputCopy] == 'd'){
+			calculate();
+		}
+		inputCopy++;
 	}
 
 	if(inputA[0] == '=' || inputA[0] == 'd'){
