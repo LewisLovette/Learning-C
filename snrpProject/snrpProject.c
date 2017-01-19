@@ -6,9 +6,6 @@
 //	entering numbers without spaces such as: '11+1+1=' makes the program stop.
 //		note: This could also been seen as an improvement as doing this would mean that negative numbers wouldn't exist when using the program without spaces.
 //		Though it is specified that it MUST be able to do this.
-//	doing 100000 - 0 d * =  prints out: answer, 'stack underflow'. In the original it goes: answer, 'stack underflow', answer.
-//		note: this doesn't need to be improved as it COULT be seen as an 'improvement' though it means functionality could differ between this and the original.
-//		To implement this: make a function that reads through each character and places the number into the array once it gets to the operator and places that into it's own array.
 
 void userInput();
 
@@ -117,20 +114,16 @@ void userInput(){
 		if(inputA[inputSP] == 'r'){ //Enter the ghetto 'r' that though it copies SRPN, it is not my desired way by using srand() and rand().
 			randomSP++;
 		}
+		//testing for operators without spaces
+		//if(inputA[inputSP] == '*' || inputA[inputSP] == '/' || inputA[inputSP] == '+' || inputA[inputSP] == '-' || inputA[inputSP] == '%'){
+		//	operatorArray[operatorSP] = inputA[inputSP];
+		//	inputA[inputSP] = '\0';
+			//printf("%c \n", inputA[inputCopy]);
+		//}
 		inputSP++;
 	}
-	//test for use without spaces.
-	while(inputCopy < inputSP){
-		if(inputA[inputCopy] == '*' || inputA[inputCopy] == '/' || inputA[inputCopy] == '+' || inputA[inputCopy] == '-' || inputA[inputCopy] == '%' ){
-			operatorArray[operatorSP] = inputA[inputCopy];
-			inputA[inputCopy] == ' ';
-		}
-		if(inputA[inputCopy] == '=' || inputA[inputCopy] == 'd'){
-			calculate();
-		}
-		inputCopy++;
-	}
-
+	
+	//printf("%s \n", inputA);
 	if(inputA[0] == '=' || inputA[0] == 'd'){
 		//printf("Test for '='\n");
 		calculate();
